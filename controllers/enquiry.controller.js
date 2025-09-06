@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 import Enquiry from "../model/enquriy.model.js";
+//?*** APPLICATION CHECK
+export const allIsRunning = async (req, res, next) => {
+  try {
+    const enquiries = await Enquiry.find();
+    return res.success(enquiries, "All enquiries fetched successfully", 200);
+  } catch (err) {
+    next(err); // Pass error to middleware
+  }
+};
 // ?*** CREATE ENQ
 export const createEnquiry = async (req, res, next) => {
   try {
